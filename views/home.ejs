@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>learn coding</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- <link rel="stylesheet" href="../public/style.css"> -->
+    <!-- <script src="engine.js" charset="utf-8"></script> -->
+</head>
+
+<body>
+    <nav>
+        <header>
+            <ul id="navigation">
+                <li><a href="https://www.linkedin.com/in/ashish-kumar-17720222a/" target="_blank">Contact</a></li>
+                <li><a href="about.html" target="_blank">About</a></li>
+
+            </ul>
+        </header>
+    </nav>
+    <main>
+
+        <h2 id="heading">Find your question here</h2>
+        <div id="image">
+            <img src="./image1.jpg" alt="image is loading">
+        </div>
+
+        <form>
+            <input type="text" name="question" id="input1" placeholder="Enter your text here...">
+            <!-- <br> -->
+            <input type="submit" value="Search" id="btn" />
+            <!-- <button onclick="func1()" type="button" id="btn" name="button">Search</button> -->
+        </form>
+        <div class="questions">
+            <div class="question">
+                <div class="title"><h2>Questions will appear here...</h2></div>
+                <div class="url-div">
+                    <a class="url" href="" target="_blank"></a>
+                </div>
+                <div class="body"><p class="statement" ></p></div>
+            </div>
+            <div class="question">
+                <div class="title"></div>
+                <div class="url-div" >
+                    <a class="url" href="" target="_blank"></a>
+                </div>
+                <div class="body"><p class="statement"></p></div>
+            </div>
+            <div class="question">
+                <div class="title"></div>
+                <div class="url-div" >
+                    <a class="url" href="" target="_blank"></a>
+                </div>
+                <div class="body"><p class="statement" ></p></div>
+            </div>
+            <div class="question">
+                <div class="title"></div>
+                <div class="url-div" >
+                    <a class="url" href="" target="_blank"></a>
+                </div>
+                <div class="body"><p class="statement" ></p></div>
+            </div>
+            <div class="question">
+                <div class="title"></div>
+                <div class="url-div" >
+                    <a class="url" href="" target="_blank"></a>
+                </div>
+                <div class="body"><p class="statement" ></p></div>
+            </div>
+
+        </div>
+
+    </main>
+    <footer>
+        <p>©Copyright 2022-2023, Ashish Kumar,All rights reserved </p>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    const form = document.querySelector("form");
+    const qelment = form.question;
+
+    const questions = document.querySelectorAll(".question");
+    const title = document.querySelectorAll(".title");
+    const url = document.querySelectorAll(".url");
+    const body = document.querySelectorAll(".statement");
+    const loadingdiv = document.querySelectorAll(".loading");
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const quest = qelment.value;
+        loadingdiv.innerHTML = `<h3>Loading......</h3>`;
+        for (i = 0; i < 5; i++) {
+            title[i].innerHTML = ``;
+            url[i].innerHTML = ``;
+            url[i].href = ``;
+            body[i].innerHTML = ``;
+        }
+        //fetch
+
+        try {
+            const res = await fetch(`/search?question=${quest}`, {
+                method: "GET"
+            });
+            const data = await res.json();
+            loadingdiv.innerHTML = ``;
+            for (i = 0; i < 5; i++) {
+                title[i].innerHTML = `<h3>${data[i].title}</h3>`;
+                url[i].innerHTML = "Go to Codechef ";
+                url[i].href = `${data[i].url}`;
+                body[i].innerHTML = `${data[i].body}`;
+            }
+        } catch (error) {
+            alert(error);
+        }
+    });
+</script>
+<!-- // -->
