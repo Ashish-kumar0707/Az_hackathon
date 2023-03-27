@@ -4,7 +4,7 @@
   "description": "search your coding question",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js"
+    "start":"node index.js index.js"
   },
   "author": "Ashish Kumar",
   "license": "ISC",
